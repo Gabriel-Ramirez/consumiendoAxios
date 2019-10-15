@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Consumiento Axios</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/Google-Style-Text-Input.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <div class="container" id="vueApp">
+        <div class="row">
+            <div class="col"><button class="btn btn-primary" id="Boton1" type="button" data-toggle="modal" data-target="#agregarProducto">Nuevo producto</button></div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="btn-group" role="group"></div>
+                <div class="alert alert-success collapse" role="alert" id="miAlerta"><span><strong>{{ alerta.titulo }} :</strong>&nbsp;{{ alerta.mensaje }}.</span><i class="fa fa-close close" v-on:click="cerrarAlerta();"></i></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Categoria</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="produc in productos">
+                                <td>{{ produc.idProducto}}</td>
+                                <td>{{ produc.nombreProducto }}</td>
+                                <td>{{ produc.precio }}<br><br></td>
+                                <td>{{ produc.idCategoria }}<br><br></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" role="dialog" tabindex="-1" id="agregarProducto">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Agregar Producto</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                    <div class="modal-body">Categoria:
+<select v-model="nuevoProducto.idCategoria">
+    <option v-for="option in categorias" v-bind:value="option.idCategoria">
+        {{option.nombreCategoria}}
+    </option>
+</select>
+<br><br>
+<div class="group">      
+    <input type="text" v-model="nuevoProducto.nombreProducto" required>
+    <span class="highlight"></span>
+    <span class="bar"></span>
+    <label>Nombre del producto</label>
+</div>
+
+
+<div class="group">      
+    <input type="text" v-model.number="nuevoProducto.precio" required>
+    <span class="highlight"></span>
+    <span class="bar"></span>
+    <label>Precio</label>
+</div>
+
+
+<div class="d-inline">
+    Es preparado: <input class="d-inline" type="checkbox" v-model="nuevoProducto.esPreparado" size="50px">
+</div></div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Cancelar</button><button class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="agregarProducto();">Agregar</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="assets/js/productos.js"></script>
+</body>
+
+</html>
